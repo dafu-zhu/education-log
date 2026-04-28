@@ -7,7 +7,7 @@ import { CourseFormModal } from './CourseFormModal';
 import { computeGpa } from '../lib/gpa';
 import { createCourse, updateCourse, deleteCourse } from '../api/courses';
 import { updateProgram, deleteProgram } from '../api/programs';
-import { uploadSyllabus, deleteSyllabus } from '../api/storage';
+import { uploadSyllabus, deleteSyllabus, moveSyllabusForCodeChange } from '../api/storage';
 import { PlusIcon } from './icons';
 
 interface Props {
@@ -33,19 +33,31 @@ export function ProgramSection({ program, courses, reload }: Props) {
   const onSubmitCourse = async (input: CourseInput, pdf: File | null, removePdf: boolean) => {
     if (editingCourse) {
       const patch: Partial<CourseInput> = { ...input };
+
       if (removePdf && editingCourse.syllabus_path) {
         await deleteSyllabus(editingCourse.syllabus_path).catch(() => undefined);
         patch.syllabus_path = null;
+      } else if (pdf) {
+        // New upload — delete the old file first if one exists.
+        if (editingCourse.syllabus_path) {
+          await deleteSyllabus(editingCourse.syllabus_path).catch(() => undefined);
+        }
+        patch.syllabus_path = await uploadSyllabus(editingCourse.id, input.code, pdf);
+      } else if (editingCourse.code !== input.code && editingCourse.syllabus_path) {
+        // No new file, but code changed — rename the existing file so the path
+        // stays consistent with the (lowered) code.
+        patch.syllabus_path = await moveSyllabusForCodeChange(
+          editingCourse.syllabus_path,
+          editingCourse.id,
+          input.code,
+        );
       }
-      const updated = await updateCourse(editingCourse.id, patch);
-      if (pdf) {
-        const path = await uploadSyllabus(updated.id, pdf);
-        await updateCourse(updated.id, { syllabus_path: path });
-      }
+
+      await updateCourse(editingCourse.id, patch);
     } else {
       const created = await createCourse(input);
       if (pdf) {
-        const path = await uploadSyllabus(created.id, pdf);
+        const path = await uploadSyllabus(created.id, input.code, pdf);
         await updateCourse(created.id, { syllabus_path: path });
       }
     }
