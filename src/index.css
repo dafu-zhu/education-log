@@ -144,7 +144,7 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 24px 0; }
 /* ─── Course row ──────────────────────────────────── */
 .course-row {
   display: grid;
-  grid-template-columns: 110px 1fr auto auto;
+  grid-template-columns: 110px 1fr 100px 110px 100px;
   gap: 12px 16px;
   padding: 10px 0;
   border-bottom: 1px dotted var(--rule);
@@ -162,14 +162,19 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 24px 0; }
   font-size: 15px;
   font-weight: 600;
   text-align: right;
-  min-width: 90px;
 }
 .course-grade .small { font-size: 12px; font-weight: 400; color: var(--ink-soft); margin-left: 6px; }
-.course-icons { display: inline-flex; gap: 6px; margin-left: 8px; }
-.course-icons a { color: var(--ink-faint); }
+.course-icons {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.course-icons a { color: var(--ink-faint); display: inline-flex; }
 .course-icons a:hover { color: var(--accent); }
 .course-edit {
   background: transparent; border: 0; color: var(--ink-faint); cursor: pointer; padding: 0 4px;
+  display: inline-flex; align-items: center;
 }
 .course-edit:hover { color: var(--accent); }
 
@@ -230,9 +235,17 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 24px 0; }
   .page { padding: 24px 16px 64px; }
   .course-row {
     grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "code  term"
+      "name  name"
+      "grade icons";
     gap: 4px 12px;
   }
+  .course-code { grid-area: code; }
+  .course-name-cell { grid-area: name; }
+  .course-term { grid-area: term; }
+  .course-grade { grid-area: grade; text-align: left; }
+  .course-icons { grid-area: icons; }
   .course-instructor { margin-left: 0; display: block; }
-  .course-term { grid-column: 1 / -1; text-align: left; }
   .course-detail { padding-left: 0; }
 }

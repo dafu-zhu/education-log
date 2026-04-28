@@ -69,40 +69,38 @@ export function CourseRow({ course, onEdit }: Props) {
         onClick={() => setExpanded((x) => !x)}
       >
         <div className="course-code">{course.code}</div>
-        <div>
+        <div className="course-name-cell">
           <span className="course-name">{course.name}</span>
           {badge && <span className="course-instructor"> · {badge}</span>}
         </div>
         <div className="course-term">{term}</div>
-        <div className="course-grade">
-          {gradeCell}
-          <span className="course-icons" onClick={(e) => e.stopPropagation()}>
-            {syllabusUrl && (
-              <a href={syllabusUrl} target="_blank" rel="noreferrer">
-                <PdfIcon />
-              </a>
-            )}
-            {course.website_url && (
-              <a href={course.website_url} target="_blank" rel="noreferrer">
-                <GlobeIcon />
-              </a>
-            )}
-            {course.github_url && (
-              <a href={course.github_url} target="_blank" rel="noreferrer">
-                <GitHubIcon />
-              </a>
-            )}
-            <button
-              className="course-edit"
-              onClick={(e) => {
-                e.stopPropagation();
-                onEdit();
-              }}
-              aria-label="edit course"
-            >
-              <EditIcon />
-            </button>
-          </span>
+        <div className="course-grade">{gradeCell}</div>
+        <div className="course-icons" onClick={(e) => e.stopPropagation()}>
+          {syllabusUrl && (
+            <a href={syllabusUrl} target="_blank" rel="noreferrer">
+              <PdfIcon />
+            </a>
+          )}
+          {course.website_url && (
+            <a href={course.website_url} target="_blank" rel="noreferrer">
+              <GlobeIcon />
+            </a>
+          )}
+          {course.github_url && (
+            <a href={course.github_url} target="_blank" rel="noreferrer">
+              <GitHubIcon />
+            </a>
+          )}
+          <button
+            className="course-edit"
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit();
+            }}
+            aria-label="edit course"
+          >
+            <EditIcon />
+          </button>
         </div>
       </li>
       {expanded &&
