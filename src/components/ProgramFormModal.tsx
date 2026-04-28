@@ -114,7 +114,10 @@ export function ProgramFormModal({ initial, onSubmit, onDelete, onClose }: Props
           <label>
             start date *
             <input
-              type="date"
+              type="text"
+              inputMode="numeric"
+              pattern="\d{4}-\d{2}-\d{2}"
+              placeholder="YYYY-MM-DD"
               value={form.start_date}
               onChange={(e) => set('start_date', e.target.value)}
               required
@@ -123,7 +126,10 @@ export function ProgramFormModal({ initial, onSubmit, onDelete, onClose }: Props
           <label>
             end date
             <input
-              type="date"
+              type="text"
+              inputMode="numeric"
+              pattern="\d{4}-\d{2}-\d{2}"
+              placeholder="YYYY-MM-DD (blank if ongoing)"
               value={form.end_date ?? ''}
               onChange={(e) => set('end_date', e.target.value || null)}
             />
