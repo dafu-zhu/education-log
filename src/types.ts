@@ -4,7 +4,7 @@
 export type ProgramKind = 'degree' | 'certificate';
 export type LifecycleStatus = 'completed' | 'in_progress' | 'planned';
 export type CourseType = 'credit' | 'audit' | 'self_study';
-export type TermSeason = 'autumn' | 'winter' | 'spring' | 'summer';
+export type TermSeason = 'fall' | 'winter' | 'spring' | 'summer';
 
 export interface GradeMapping {
   letter: string;

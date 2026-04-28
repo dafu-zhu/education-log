@@ -18,7 +18,7 @@ const make = (overrides: Partial<Course>): Course => ({
   code: 'X 100',
   name: 'X',
   term_year: 2023,
-  term_season: 'autumn',
+  term_season: 'fall',
   status: 'completed',
   type: 'credit',
   instructor: null,

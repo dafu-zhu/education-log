@@ -16,7 +16,7 @@ interface Props {
   reload: () => Promise<void>;
 }
 
-const seasonOrder = { autumn: 0, winter: 1, spring: 2, summer: 3 } as const;
+const seasonOrder = { fall: 0, winter: 1, spring: 2, summer: 3 } as const;
 
 export function ProgramSection({ program, courses, reload }: Props) {
   const [editingProgram, setEditingProgram] = useState(false);

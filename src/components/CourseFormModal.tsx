@@ -18,14 +18,20 @@ interface Props {
   onClose: () => void;
 }
 
-const SEASONS: TermSeason[] = ['autumn', 'winter', 'spring', 'summer'];
+const SEASONS: TermSeason[] = ['fall', 'winter', 'spring', 'summer'];
+const SEASON_LABEL: Record<TermSeason, string> = {
+  fall: 'Fall',
+  winter: 'Winter',
+  spring: 'Spring',
+  summer: 'Summer',
+};
 
 const blank = (programId: string): CourseInput => ({
   program_id: programId,
   code: '',
   name: '',
   term_year: new Date().getFullYear(),
-  term_season: 'autumn',
+  term_season: 'fall',
   status: 'planned',
   type: 'credit',
   instructor: null,
@@ -139,7 +145,7 @@ export function CourseFormModal({ program, initial, onSubmit, onDelete, onClose 
             >
               {SEASONS.map((s) => (
                 <option key={s} value={s}>
-                  {s}
+                  {SEASON_LABEL[s]}
                 </option>
               ))}
             </select>

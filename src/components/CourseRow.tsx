@@ -9,7 +9,7 @@ interface Props {
 }
 
 const seasonLabel: Record<string, string> = {
-  autumn: 'Autumn',
+  fall: 'Fall',
   winter: 'Winter',
   spring: 'Spring',
   summer: 'Summer',
