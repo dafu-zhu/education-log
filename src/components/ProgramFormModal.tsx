@@ -115,6 +115,8 @@ export function ProgramFormModal({ initial, onSubmit, onDelete, onClose }: Props
             start date *
             <input
               type="date"
+              min="1900-01-01"
+              max="2100-12-31"
               value={form.start_date}
               onChange={(e) => set('start_date', e.target.value)}
               required
@@ -124,6 +126,8 @@ export function ProgramFormModal({ initial, onSubmit, onDelete, onClose }: Props
             end date
             <input
               type="date"
+              min="1900-01-01"
+              max="2100-12-31"
               value={form.end_date ?? ''}
               onChange={(e) => set('end_date', e.target.value || null)}
             />
