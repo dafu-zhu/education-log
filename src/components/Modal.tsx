@@ -16,8 +16,8 @@ export function Modal({ title, onClose, children }: Props) {
   }, [onClose]);
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+    <div className="modal-backdrop">
+      <div className="modal">
         <h2>{title}</h2>
         {children}
       </div>
