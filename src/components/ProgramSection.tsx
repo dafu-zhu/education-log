@@ -25,7 +25,10 @@ export function ProgramSection({ program, courses, reload }: Props) {
 
   const sortedCourses = [...courses].sort((a, b) => {
     if (a.term_year !== b.term_year) return a.term_year - b.term_year;
-    return seasonOrder[a.term_season] - seasonOrder[b.term_season];
+    if (a.term_season !== b.term_season) {
+      return seasonOrder[a.term_season] - seasonOrder[b.term_season];
+    }
+    return a.code.localeCompare(b.code);
   });
 
   const gpa = computeGpa(courses, program.grading_scale);
