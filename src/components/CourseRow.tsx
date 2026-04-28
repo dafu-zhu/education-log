@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Course } from '../types';
-import { PdfIcon, GitHubIcon, EditIcon } from './icons';
+import { PdfIcon, GitHubIcon, GlobeIcon, EditIcon } from './icons';
 import { getSyllabusUrl } from '../api/storage';
 
 interface Props {
@@ -82,6 +82,11 @@ export function CourseRow({ course, onEdit }: Props) {
                 <PdfIcon />
               </a>
             )}
+            {course.website_url && (
+              <a href={course.website_url} target="_blank" rel="noreferrer">
+                <GlobeIcon />
+              </a>
+            )}
             {course.github_url && (
               <a href={course.github_url} target="_blank" rel="noreferrer">
                 <GitHubIcon />
@@ -100,30 +105,42 @@ export function CourseRow({ course, onEdit }: Props) {
           </span>
         </div>
       </li>
-      {expanded && (course.instructor || course.note || syllabusUrl || course.github_url) && (
-        <li className="course-detail">
-          {course.instructor && (
-            <p>
-              <em>Instructor:</em> {course.instructor}
-            </p>
-          )}
-          {course.note && <p>{course.note}</p>}
-          {syllabusUrl && (
-            <p>
-              <a href={syllabusUrl} target="_blank" rel="noreferrer">
-                Open syllabus PDF
-              </a>
-            </p>
-          )}
-          {course.github_url && (
-            <p>
-              <a href={course.github_url} target="_blank" rel="noreferrer">
-                {course.github_url}
-              </a>
-            </p>
-          )}
-        </li>
-      )}
+      {expanded &&
+        (course.instructor ||
+          course.note ||
+          syllabusUrl ||
+          course.website_url ||
+          course.github_url) && (
+          <li className="course-detail">
+            {course.instructor && (
+              <p>
+                <em>Instructor:</em> {course.instructor}
+              </p>
+            )}
+            {course.note && <p>{course.note}</p>}
+            {syllabusUrl && (
+              <p>
+                <a href={syllabusUrl} target="_blank" rel="noreferrer">
+                  Open syllabus PDF
+                </a>
+              </p>
+            )}
+            {course.website_url && (
+              <p>
+                <a href={course.website_url} target="_blank" rel="noreferrer">
+                  {course.website_url}
+                </a>
+              </p>
+            )}
+            {course.github_url && (
+              <p>
+                <a href={course.github_url} target="_blank" rel="noreferrer">
+                  {course.github_url}
+                </a>
+              </p>
+            )}
+          </li>
+        )}
     </>
   );
 }

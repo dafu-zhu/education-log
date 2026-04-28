@@ -38,6 +38,7 @@ const blank = (programId: string): CourseInput => ({
   credits: null,
   grade: null,
   syllabus_path: null,
+  website_url: null,
   github_url: null,
   note: null,
 });
@@ -198,6 +199,15 @@ export function CourseFormModal({ program, initial, onSubmit, onDelete, onClose 
             </select>
           </label>
         </div>
+
+        <label>
+          course website URL
+          <input
+            type="url"
+            value={form.website_url ?? ''}
+            onChange={(e) => set('website_url', e.target.value || null)}
+          />
+        </label>
 
         <label>
           github URL

@@ -44,6 +44,7 @@ export interface Course {
   credits: number | null;
   grade: string | null;
   syllabus_path: string | null;
+  website_url: string | null;
   github_url: string | null;
   note: string | null;
   created_at: string;

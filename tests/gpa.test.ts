@@ -25,6 +25,7 @@ const make = (overrides: Partial<Course>): Course => ({
   credits: 100,
   grade: 'A',
   syllabus_path: null,
+  website_url: null,
   github_url: null,
   note: null,
   created_at: '',
