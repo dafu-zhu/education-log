@@ -71,7 +71,6 @@ export function CourseRow({ course, onEdit }: Props) {
         <div className="course-code">{course.code}</div>
         <div>
           <span className="course-name">{course.name}</span>
-          {course.instructor && <span className="course-instructor">{course.instructor}</span>}
           {badge && <span className="course-instructor"> · {badge}</span>}
         </div>
         <div className="course-term">{term}</div>
@@ -101,8 +100,13 @@ export function CourseRow({ course, onEdit }: Props) {
           </span>
         </div>
       </li>
-      {expanded && (course.note || syllabusUrl || course.github_url) && (
+      {expanded && (course.instructor || course.note || syllabusUrl || course.github_url) && (
         <li className="course-detail">
+          {course.instructor && (
+            <p>
+              <em>Instructor:</em> {course.instructor}
+            </p>
+          )}
           {course.note && <p>{course.note}</p>}
           {syllabusUrl && (
             <p>
