@@ -16,7 +16,8 @@ interface Props {
   reload: () => Promise<void>;
 }
 
-const seasonOrder = { fall: 0, winter: 1, spring: 2, summer: 3 } as const;
+// Calendar-year position within a year: Winter (Jan) → Spring (Mar) → Summer (Jun) → Fall (Sep).
+const seasonOrder = { winter: 0, spring: 1, summer: 2, fall: 3 } as const;
 
 export function ProgramSection({ program, courses, reload }: Props) {
   const [editingProgram, setEditingProgram] = useState(false);
